@@ -1,30 +1,42 @@
+let displayValue = []
+
+const btns = document.querySelectorAll(".btn");
+const display = document.getElementById("display")
+
 // Computing functions - take two numbers, return result.
-function add (number1, number2) {
-  return number1+number2
+function add(number1, number2) {
+  return number1 + number2;
 }
 
-function substract (number1, number2) {
-  return number1-number2
+function substract(number1, number2) {
+  return number1 - number2;
 }
 
-function multiply (number1, number2) {
-  console.log(number1*number2)
+function multiply(number1, number2) {
+  console.log(number1 * number2);
 }
 
-function divide (number1, number2) {
-  return number1/number2
+function divide(number1, number2) {
+  return number1 / number2;
 }
 
 // Operate functions - take operator and two numbers, and call computing functions to return the result
-function operate (operator, number1, number2){
+function operate(operator, number1, number2) {
   if (operator == "+") {
-    add(number1,number2)
+    add(number1, number2);
   } else if (operator == "-") {
-    substract(number1,number2)
+    substract(number1, number2);
   } else if (operator == "*") {
-    multiply(number1,number2)
+    multiply(number1, number2);
   } else if (operator == "/") {
-    divide(number1,number2)
+    divide(number1, number2);
   }
 }
 
+// Display clicked values
+for (const btn of btns) {
+  btn.addEventListener("click", (e) => {
+    displayValue += e.currentTarget.value
+    display.innerHTML = displayValue
+  });
+}
