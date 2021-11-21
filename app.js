@@ -5,7 +5,7 @@ let values = [];
 const btns = document.querySelectorAll(".btn");
 const display = document.getElementById("display");
 
-// Computing functions - take two numbers, return result.
+// Computing functions - take two numbers, return result, display the result
 const add = (arr) => {
   result = arr.reduce((a, b) => a + b, 0);
   displayValue = result
@@ -75,6 +75,3 @@ for (const btn of btns) {
     }
   });
 }
-
-// Push result to the array, and set this result as a displayValue
-// After, possibility to use result to compute again
