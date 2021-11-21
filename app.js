@@ -1,42 +1,68 @@
-let displayValue = []
+let displayValue = "";
+let operator = "";
+let values = [];
 
 const btns = document.querySelectorAll(".btn");
-const display = document.getElementById("display")
+const display = document.getElementById("display");
 
 // Computing functions - take two numbers, return result.
-function add(number1, number2) {
-  return number1 + number2;
-}
+const add = arr => console.log(arr.reduce((a,b) => a + b, 0))
 
-function substract(number1, number2) {
-  return number1 - number2;
-}
+const substract = arr => console.log(arr.reduce((a,b) => a-b))
 
 function multiply(number1, number2) {
-  console.log(number1 * number2);
+  return parseInt(number1) * parseInt(number2);
 }
 
 function divide(number1, number2) {
-  return number1 / number2;
+  return parseInt(number1) / parseInt(number2);
 }
 
-// Operate functions - take operator and two numbers, and call computing functions to return the result
-function operate(operator, number1, number2) {
+// Take operator and two numbers, and call computing functions to return the result
+function operate(operator, ...values) {
   if (operator == "+") {
-    add(number1, number2);
+    add(...values);
   } else if (operator == "-") {
-    substract(number1, number2);
+    substract(...values);
   } else if (operator == "*") {
-    multiply(number1, number2);
+    multiply(valueOne, valueTwo);
   } else if (operator == "/") {
-    divide(number1, number2);
+    divide(valueOne, valueTwo);
   }
 }
 
-// Display clicked values
 for (const btn of btns) {
   btn.addEventListener("click", (e) => {
-    displayValue += e.currentTarget.value
-    display.innerHTML = displayValue
+    if (
+      e.currentTarget.value == "+" ||
+      e.currentTarget.value == "-" ||
+      e.currentTarget.value == "*" ||
+      e.currentTarget.value == "/"
+    ) {
+      operator = e.currentTarget.value;
+      if (displayValue === "") {
+        values.push(parseInt(displayValue));
+      } else {
+        newValue = displayValue.slice(1)
+        values.push(parseInt(newValue))
+      }
+      displayValue = "";
+    }
+
+    if (
+      e.currentTarget.value != "W" &&
+      e.currentTarget.value != "C" &&
+      e.currentTarget.value != "+" &&
+      e.currentTarget.value != "-" &&
+      e.currentTarget.value != "*" &&
+      e.currentTarget.value != "/"
+    ) {
+      displayValue += e.currentTarget.value;
+      display.innerHTML = displayValue;
+    }
+
+    if (e.currentTarget.value == "=") {
+      secondValue = operate(operator, values);
+    }
   });
 }
