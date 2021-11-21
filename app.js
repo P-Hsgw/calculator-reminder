@@ -6,9 +6,9 @@ const btns = document.querySelectorAll(".btn");
 const display = document.getElementById("display");
 
 // Computing functions - take two numbers, return result.
-const add = arr => console.log(arr.reduce((a,b) => a + b, 0))
+const add = (arr) => console.log(arr.reduce((a, b) => a + b, 0));
 
-const substract = arr => console.log(arr.reduce((a,b) => a-b))
+const substract = (arr) => console.log(arr.reduce((a, b) => a - b));
 
 function multiply(number1, number2) {
   return parseInt(number1) * parseInt(number2);
@@ -40,13 +40,9 @@ for (const btn of btns) {
       e.currentTarget.value == "/"
     ) {
       operator = e.currentTarget.value;
-      if (displayValue === "") {
-        values.push(parseInt(displayValue));
-      } else {
-        newValue = displayValue.slice(1)
-        values.push(parseInt(newValue))
-      }
+      values.push(parseInt(displayValue));
       displayValue = "";
+      console.log(values)
     }
 
     if (
@@ -62,6 +58,7 @@ for (const btn of btns) {
     }
 
     if (e.currentTarget.value == "=") {
+      values.push(parseInt(displayValue));
       secondValue = operate(operator, values);
     }
   });
