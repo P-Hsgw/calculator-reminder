@@ -73,5 +73,12 @@ for (const btn of btns) {
       values.push(parseInt(displayValue));
       operate(operator, values);
     }
+
+    if (e.currentTarget.value == "C") {
+      displayValue = ""
+      operator = ""
+      values = []
+      display.innerHTML = displayValue;
+    }
   });
 }
