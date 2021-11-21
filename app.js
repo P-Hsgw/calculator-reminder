@@ -65,14 +65,15 @@ for (const btn of btns) {
       e.currentTarget.value != "+" &&
       e.currentTarget.value != "-" &&
       e.currentTarget.value != "*" &&
-      e.currentTarget.value != "/"
+      e.currentTarget.value != "/" &&
+      e.currentTarget.value != "="
     ) {
       displayValue += e.currentTarget.value;
       display.innerHTML = displayValue;
     }
 
     if (e.currentTarget.value == "=") {
-      values.push(parseInt(displayValue));
+      values.push(parseFloat(displayValue));
       operate(operator, values);
       values = [];
     }
