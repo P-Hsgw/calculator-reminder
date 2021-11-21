@@ -45,6 +45,8 @@ function operate(operator, ...values) {
 
 for (const btn of btns) {
   btn.addEventListener("click", (e) => {
+
+    // Handle operators
     if (
       e.currentTarget.value == "+" ||
       e.currentTarget.value == "-" ||
@@ -56,6 +58,7 @@ for (const btn of btns) {
       displayValue = "";
     }
 
+    // Display numerical values
     if (
       e.currentTarget.value != "B" &&
       e.currentTarget.value != "C" &&
@@ -71,9 +74,10 @@ for (const btn of btns) {
     if (e.currentTarget.value == "=") {
       values.push(parseInt(displayValue));
       operate(operator, values);
-      values=[]
+      values = [];
     }
 
+    // Handle clear
     if (e.currentTarget.value == "C") {
       displayValue = "";
       operator = "";
@@ -81,9 +85,10 @@ for (const btn of btns) {
       display.innerHTML = displayValue;
     }
 
+    // Handle backspace
     if (e.currentTarget.value == "B") {
-      displayValue = displayValue.slice(0, -1)
-      display.innerHTML = displayValue
+      displayValue = displayValue.slice(0, -1);
+      display.innerHTML = displayValue;
     }
   });
 }
