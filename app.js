@@ -8,28 +8,27 @@ const display = document.getElementById("display");
 // Computing functions - take two numbers, return result, display the result
 const add = (arr) => {
   result = arr.reduce((a, b) => a + b, 0);
-  displayValue = result
+  displayValue = result;
   display.innerHTML = displayValue;
-}
+};
 
 const substract = (arr) => {
- result = arr.reduce((a, b) => a - b);
- displayValue = result
- display.innerHTML = displayValue;
-
-}
+  result = arr.reduce((a, b) => a - b);
+  displayValue = result;
+  display.innerHTML = displayValue;
+};
 
 const multiply = (arr) => {
   result = arr.reduce((a, b) => a * b);
-  displayValue = result
+  displayValue = result;
   display.innerHTML = displayValue;
-} 
+};
 
 const divide = (arr) => {
   result = arr.reduce((a, b) => a / b);
-  displayValue = result
+  displayValue = result;
   display.innerHTML = displayValue;
-}
+};
 
 // Take operator and two numbers, and call computing functions to return the result
 function operate(operator, ...values) {
@@ -72,12 +71,13 @@ for (const btn of btns) {
     if (e.currentTarget.value == "=") {
       values.push(parseInt(displayValue));
       operate(operator, values);
+      values=[]
     }
 
     if (e.currentTarget.value == "C") {
-      displayValue = ""
-      operator = ""
-      values = []
+      displayValue = "";
+      operator = "";
+      values = [];
       display.innerHTML = displayValue;
     }
   });
