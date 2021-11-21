@@ -10,13 +10,9 @@ const add = (arr) => console.log(arr.reduce((a, b) => a + b, 0));
 
 const substract = (arr) => console.log(arr.reduce((a, b) => a - b));
 
-function multiply(number1, number2) {
-  return parseInt(number1) * parseInt(number2);
-}
+const multiply = (arr) => console.log(arr.reduce((a, b) => a * b));
 
-function divide(number1, number2) {
-  return parseInt(number1) / parseInt(number2);
-}
+const divide = (arr) => console.log(arr.reduce((a, b) => a / b));
 
 // Take operator and two numbers, and call computing functions to return the result
 function operate(operator, ...values) {
@@ -25,9 +21,9 @@ function operate(operator, ...values) {
   } else if (operator == "-") {
     substract(...values);
   } else if (operator == "*") {
-    multiply(valueOne, valueTwo);
+    multiply(...values);
   } else if (operator == "/") {
-    divide(valueOne, valueTwo);
+    divide(...values);
   }
 }
 
@@ -63,3 +59,6 @@ for (const btn of btns) {
     }
   });
 }
+
+// Push result to the array, and set this result as a displayValue
+// After, possibility to use result to compute again
