@@ -57,7 +57,7 @@ for (const btn of btns) {
     }
 
     if (
-      e.currentTarget.value != "W" &&
+      e.currentTarget.value != "B" &&
       e.currentTarget.value != "C" &&
       e.currentTarget.value != "+" &&
       e.currentTarget.value != "-" &&
@@ -79,6 +79,11 @@ for (const btn of btns) {
       operator = "";
       values = [];
       display.innerHTML = displayValue;
+    }
+
+    if (e.currentTarget.value == "B") {
+      displayValue = displayValue.slice(0, -1)
+      display.innerHTML = displayValue
     }
   });
 }
