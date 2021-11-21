@@ -6,18 +6,35 @@ const btns = document.querySelectorAll(".btn");
 const display = document.getElementById("display");
 
 // Computing functions - take two numbers, return result.
-const add = (arr) => console.log(arr.reduce((a, b) => a + b, 0));
+const add = (arr) => {
+  result = arr.reduce((a, b) => a + b, 0);
+  displayValue = result
+  display.innerHTML = displayValue;
+}
 
-const substract = (arr) => console.log(arr.reduce((a, b) => a - b));
+const substract = (arr) => {
+ result = arr.reduce((a, b) => a - b);
+ displayValue = result
+ display.innerHTML = displayValue;
 
-const multiply = (arr) => console.log(arr.reduce((a, b) => a * b));
+}
 
-const divide = (arr) => console.log(arr.reduce((a, b) => a / b));
+const multiply = (arr) => {
+  result = arr.reduce((a, b) => a * b);
+  displayValue = result
+  display.innerHTML = displayValue;
+} 
+
+const divide = (arr) => {
+  result = arr.reduce((a, b) => a / b);
+  displayValue = result
+  display.innerHTML = displayValue;
+}
 
 // Take operator and two numbers, and call computing functions to return the result
 function operate(operator, ...values) {
   if (operator == "+") {
-    add(...values);
+    return add(...values);
   } else if (operator == "-") {
     substract(...values);
   } else if (operator == "*") {
@@ -38,7 +55,6 @@ for (const btn of btns) {
       operator = e.currentTarget.value;
       values.push(parseInt(displayValue));
       displayValue = "";
-      console.log(values)
     }
 
     if (
@@ -55,7 +71,7 @@ for (const btn of btns) {
 
     if (e.currentTarget.value == "=") {
       values.push(parseInt(displayValue));
-      secondValue = operate(operator, values);
+      operate(operator, values);
     }
   });
 }
