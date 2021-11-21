@@ -66,7 +66,8 @@ for (const btn of btns) {
       e.currentTarget.value != "-" &&
       e.currentTarget.value != "*" &&
       e.currentTarget.value != "/" &&
-      e.currentTarget.value != "="
+      e.currentTarget.value != "=" && 
+      e.currentTarget.value != "."
     ) {
       displayValue += e.currentTarget.value;
       display.innerHTML = displayValue;
@@ -89,6 +90,11 @@ for (const btn of btns) {
     // Handle backspace
     if (e.currentTarget.value == "B") {
       displayValue = displayValue.slice(0, -1);
+      display.innerHTML = displayValue;
+    }
+
+    if (e.currentTarget.value == "." && displayValue != "" && displayValue.includes(".") === false) {
+      displayValue += e.currentTarget.value;
       display.innerHTML = displayValue;
     }
   });
