@@ -47,12 +47,7 @@ function operate(operator, ...values) {
 
 // Handle operators - check which operator is clicked, and push values from display to computing values array
 const handleOperators = (e) => {
-  if (
-    e == "+" ||
-    e == "-" ||
-    e == "*" ||
-    e == "/"
-  ) {
+  if (e == "+" || e == "-" || e == "*" || e == "/") {
     operator = e;
     values.push(parseFloat(displayValue));
     displayValue = "";
@@ -62,14 +57,16 @@ const handleOperators = (e) => {
 // Display clicked numbers
 const displayNumericalValues = (e) => {
   if (
-    e != "B" &&
-    e != "C" &&
-    e != "+" &&
-    e != "-" &&
-    e != "*" &&
-    e != "/" &&
-    e != "=" &&
-    e != "."
+    e == "1" ||
+    e == "2" ||
+    e == "3" ||
+    e == "4" ||
+    e == "5" ||
+    e == "6" ||
+    e == "7" ||
+    e == "8" ||
+    e == "9" ||
+    e == "0"
   ) {
     displayValue += e;
     display.innerHTML = displayValue;
@@ -87,7 +84,7 @@ const handleComputing = (e) => {
 
 // Clear calculator
 const handleClear = (e) => {
-  if (e == "C") {
+  if (e == "C" || e == "Escape") {
     displayValue = "";
     operator = "";
     values = [];
@@ -97,7 +94,7 @@ const handleClear = (e) => {
 
 // Backspace displayed values
 const handleBackspace = (e) => {
-  if (e == "B") {
+  if (e == "B" || e == "Backspace") {
     displayValue = displayValue.slice(0, -1);
     display.innerHTML = displayValue;
   }
@@ -105,11 +102,7 @@ const handleBackspace = (e) => {
 
 // Add dots, allowing to handle decimals
 const handleDot = (e) => {
-  if (
-    e == "." &&
-    displayValue != "" &&
-    displayValue.includes(".") === false
-  ) {
+  if (e == "." && displayValue != "" && displayValue.includes(".") === false) {
     displayValue += e;
     display.innerHTML = displayValue;
   }
@@ -131,10 +124,16 @@ for (const btn of btns) {
   });
 }
 
-// document.addEventListener("keydown", function (e) {
+document.addEventListener("keydown", function (e) {
+  handleOperators(e.key);
 
-// })
+  displayNumericalValues(e.key);
 
-// document.addEventListener("keydown", function (e) {
-//   console.log(e.key);
-// });
+  handleComputing(e.key);
+
+  handleDot(e.key);
+
+  handleBackspace(e.key);
+
+  handleClear(e.key);
+});
