@@ -2,6 +2,8 @@ let displayValue = "";
 let operator = "";
 let values = [];
 
+// If isComputing, add operator to operatorQueue, and move first operator fro the operatorQueue to operator if computed
+
 const btns = document.querySelectorAll(".btn");
 const display = document.getElementById("display");
 
@@ -43,22 +45,57 @@ function operate(operator, ...values) {
   }
 }
 
+// Handle operators - check which operator is clicked, and push values from display to computing values array 
+const handleOperators = (e) => {
+  operator = e.currentTarget.value;
+  values.push(parseFloat(displayValue));
+  displayValue = "";
+};
+
+// Display clicked numbers
+const displayNumericalValues = (e) => {
+  displayValue += e.currentTarget.value;
+  display.innerHTML = displayValue;
+};
+
+// Compute numbers from values array
+const handleComputing = () => {
+  values.push(parseFloat(displayValue));
+  operate(operator, values);
+  values = [];
+};
+
+// Clear calculator
+const handleClear = () => {
+  displayValue = "";
+  operator = "";
+  values = [];
+  display.innerHTML = displayValue;
+};
+
+// Backspace displayed values
+const handleBackspace = () => {
+  displayValue = displayValue.slice(0, -1);
+  display.innerHTML = displayValue;
+};
+
+// Add dots, allowing to handle decimals
+const handleDot = (e) => {
+  displayValue += e.currentTarget.value;
+  display.innerHTML = displayValue;
+};
+
 for (const btn of btns) {
   btn.addEventListener("click", (e) => {
-
-    // Handle operators
     if (
       e.currentTarget.value == "+" ||
       e.currentTarget.value == "-" ||
       e.currentTarget.value == "*" ||
       e.currentTarget.value == "/"
     ) {
-      operator = e.currentTarget.value;
-      values.push(parseFloat(displayValue));
-      displayValue = "";
+      handleOperators(e);
     }
 
-    // Display numerical values
     if (
       e.currentTarget.value != "B" &&
       e.currentTarget.value != "C" &&
@@ -66,37 +103,33 @@ for (const btn of btns) {
       e.currentTarget.value != "-" &&
       e.currentTarget.value != "*" &&
       e.currentTarget.value != "/" &&
-      e.currentTarget.value != "=" && 
+      e.currentTarget.value != "=" &&
       e.currentTarget.value != "."
     ) {
-      displayValue += e.currentTarget.value;
-      display.innerHTML = displayValue;
+      displayNumericalValues(e);
     }
 
     if (e.currentTarget.value == "=") {
-      values.push(parseFloat(displayValue));
-      operate(operator, values);
-      values = [];
+      handleComputing();
     }
 
     // Handle clear
     if (e.currentTarget.value == "C") {
-      displayValue = "";
-      operator = "";
-      values = [];
-      display.innerHTML = displayValue;
+      handleClear();
     }
 
     // Handle backspace
     if (e.currentTarget.value == "B") {
-      displayValue = displayValue.slice(0, -1);
-      display.innerHTML = displayValue;
+      handleBackspace();
     }
 
     // Handle "dot" character
-    if (e.currentTarget.value == "." && displayValue != "" && displayValue.includes(".") === false) {
-      displayValue += e.currentTarget.value;
-      display.innerHTML = displayValue;
+    if (
+      e.currentTarget.value == "." &&
+      displayValue != "" &&
+      displayValue.includes(".") === false
+    ) {
+      handleDot(e);
     }
   });
 }
