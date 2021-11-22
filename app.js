@@ -48,12 +48,12 @@ function operate(operator, ...values) {
 // Handle operators - check which operator is clicked, and push values from display to computing values array
 const handleOperators = (e) => {
   if (
-    e.currentTarget.value == "+" ||
-    e.currentTarget.value == "-" ||
-    e.currentTarget.value == "*" ||
-    e.currentTarget.value == "/"
+    e == "+" ||
+    e == "-" ||
+    e == "*" ||
+    e == "/"
   ) {
-    operator = e.currentTarget.value;
+    operator = e;
     values.push(parseFloat(displayValue));
     displayValue = "";
   }
@@ -62,23 +62,23 @@ const handleOperators = (e) => {
 // Display clicked numbers
 const displayNumericalValues = (e) => {
   if (
-    e.currentTarget.value != "B" &&
-    e.currentTarget.value != "C" &&
-    e.currentTarget.value != "+" &&
-    e.currentTarget.value != "-" &&
-    e.currentTarget.value != "*" &&
-    e.currentTarget.value != "/" &&
-    e.currentTarget.value != "=" &&
-    e.currentTarget.value != "."
+    e != "B" &&
+    e != "C" &&
+    e != "+" &&
+    e != "-" &&
+    e != "*" &&
+    e != "/" &&
+    e != "=" &&
+    e != "."
   ) {
-    displayValue += e.currentTarget.value;
+    displayValue += e;
     display.innerHTML = displayValue;
   }
 };
 
 // Compute numbers from values array
 const handleComputing = (e) => {
-  if (e.currentTarget.value == "=") {
+  if (e == "=") {
     values.push(parseFloat(displayValue));
     operate(operator, values);
     values = [];
@@ -87,7 +87,7 @@ const handleComputing = (e) => {
 
 // Clear calculator
 const handleClear = (e) => {
-  if (e.currentTarget.value == "C") {
+  if (e == "C") {
     displayValue = "";
     operator = "";
     values = [];
@@ -97,7 +97,7 @@ const handleClear = (e) => {
 
 // Backspace displayed values
 const handleBackspace = (e) => {
-  if (e.currentTarget.value == "B") {
+  if (e == "B") {
     displayValue = displayValue.slice(0, -1);
     display.innerHTML = displayValue;
   }
@@ -106,31 +106,34 @@ const handleBackspace = (e) => {
 // Add dots, allowing to handle decimals
 const handleDot = (e) => {
   if (
-    e.currentTarget.value == "." &&
+    e == "." &&
     displayValue != "" &&
     displayValue.includes(".") === false
   ) {
-    displayValue += e.currentTarget.value;
+    displayValue += e;
     display.innerHTML = displayValue;
   }
 };
 
 for (const btn of btns) {
   btn.addEventListener("click", (e) => {
-    handleOperators(e);
+    handleOperators(e.currentTarget.value);
 
-    displayNumericalValues(e);
+    displayNumericalValues(e.currentTarget.value);
 
-    handleComputing(e);
+    handleComputing(e.currentTarget.value);
 
-    handleClear(e);
+    handleClear(e.currentTarget.value);
 
-    handleBackspace(e);
+    handleBackspace(e.currentTarget.value);
 
-    handleDot(e);
+    handleDot(e.currentTarget.value);
   });
 }
 
+// document.addEventListener("keydown", function (e) {
+
+// })
 
 // document.addEventListener("keydown", function (e) {
 //   console.log(e.key);
