@@ -45,91 +45,93 @@ function operate(operator, ...values) {
   }
 }
 
-// Handle operators - check which operator is clicked, and push values from display to computing values array 
+// Handle operators - check which operator is clicked, and push values from display to computing values array
 const handleOperators = (e) => {
-  operator = e.currentTarget.value;
-  values.push(parseFloat(displayValue));
-  displayValue = "";
+  if (
+    e.currentTarget.value == "+" ||
+    e.currentTarget.value == "-" ||
+    e.currentTarget.value == "*" ||
+    e.currentTarget.value == "/"
+  ) {
+    operator = e.currentTarget.value;
+    values.push(parseFloat(displayValue));
+    displayValue = "";
+  }
 };
 
 // Display clicked numbers
 const displayNumericalValues = (e) => {
-  displayValue += e.currentTarget.value;
-  display.innerHTML = displayValue;
+  if (
+    e.currentTarget.value != "B" &&
+    e.currentTarget.value != "C" &&
+    e.currentTarget.value != "+" &&
+    e.currentTarget.value != "-" &&
+    e.currentTarget.value != "*" &&
+    e.currentTarget.value != "/" &&
+    e.currentTarget.value != "=" &&
+    e.currentTarget.value != "."
+  ) {
+    displayValue += e.currentTarget.value;
+    display.innerHTML = displayValue;
+  }
 };
 
 // Compute numbers from values array
-const handleComputing = () => {
-  values.push(parseFloat(displayValue));
-  operate(operator, values);
-  values = [];
+const handleComputing = (e) => {
+  if (e.currentTarget.value == "=") {
+    values.push(parseFloat(displayValue));
+    operate(operator, values);
+    values = [];
+  }
 };
 
 // Clear calculator
-const handleClear = () => {
-  displayValue = "";
-  operator = "";
-  values = [];
-  display.innerHTML = displayValue;
+const handleClear = (e) => {
+  if (e.currentTarget.value == "C") {
+    displayValue = "";
+    operator = "";
+    values = [];
+    display.innerHTML = displayValue;
+  }
 };
 
 // Backspace displayed values
-const handleBackspace = () => {
-  displayValue = displayValue.slice(0, -1);
-  display.innerHTML = displayValue;
+const handleBackspace = (e) => {
+  if (e.currentTarget.value == "B") {
+    displayValue = displayValue.slice(0, -1);
+    display.innerHTML = displayValue;
+  }
 };
 
 // Add dots, allowing to handle decimals
 const handleDot = (e) => {
-  displayValue += e.currentTarget.value;
-  display.innerHTML = displayValue;
+  if (
+    e.currentTarget.value == "." &&
+    displayValue != "" &&
+    displayValue.includes(".") === false
+  ) {
+    displayValue += e.currentTarget.value;
+    display.innerHTML = displayValue;
+  }
 };
 
 for (const btn of btns) {
   btn.addEventListener("click", (e) => {
-    if (
-      e.currentTarget.value == "+" ||
-      e.currentTarget.value == "-" ||
-      e.currentTarget.value == "*" ||
-      e.currentTarget.value == "/"
-    ) {
-      handleOperators(e);
-    }
+    handleOperators(e);
 
-    if (
-      e.currentTarget.value != "B" &&
-      e.currentTarget.value != "C" &&
-      e.currentTarget.value != "+" &&
-      e.currentTarget.value != "-" &&
-      e.currentTarget.value != "*" &&
-      e.currentTarget.value != "/" &&
-      e.currentTarget.value != "=" &&
-      e.currentTarget.value != "."
-    ) {
-      displayNumericalValues(e);
-    }
+    displayNumericalValues(e);
 
-    if (e.currentTarget.value == "=") {
-      handleComputing();
-    }
+    handleComputing(e);
 
-    // Handle clear
-    if (e.currentTarget.value == "C") {
-      handleClear();
-    }
+    handleClear(e);
 
-    // Handle backspace
-    if (e.currentTarget.value == "B") {
-      handleBackspace();
-    }
+    handleBackspace(e);
 
-    // Handle "dot" character
-    if (
-      e.currentTarget.value == "." &&
-      displayValue != "" &&
-      displayValue.includes(".") === false
-    ) {
-      handleDot(e);
-    }
+    handleDot(e);
   });
 }
+
+
+// document.addEventListener("keydown", function (e) {
+//   console.log(e.key);
+// });
