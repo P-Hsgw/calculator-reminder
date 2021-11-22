@@ -49,6 +49,16 @@
   border: none;
 }
 
-/* .orange--btn {
-  background-color: orange;
-} */
+.btn--orange {
+  background-color: #D8973C;
+  
+}
+
+.btn--orange:hover {
+  background-color: #CC8828;
+}
+
+.btn--orange:active {
+  background-color: #AA7122;
+  color: white;
+}
