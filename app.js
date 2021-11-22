@@ -54,7 +54,7 @@ for (const btn of btns) {
       e.currentTarget.value == "/"
     ) {
       operator = e.currentTarget.value;
-      values.push(parseInt(displayValue));
+      values.push(parseFloat(displayValue));
       displayValue = "";
     }
 
