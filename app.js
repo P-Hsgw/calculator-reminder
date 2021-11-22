@@ -93,6 +93,7 @@ for (const btn of btns) {
       display.innerHTML = displayValue;
     }
 
+    // Handle "dot" character
     if (e.currentTarget.value == "." && displayValue != "" && displayValue.includes(".") === false) {
       displayValue += e.currentTarget.value;
       display.innerHTML = displayValue;
