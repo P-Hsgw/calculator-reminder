@@ -2,8 +2,6 @@ let displayValue = "";
 let operator = [];
 let values = [];
 
-// Change operator to an array, and when computing use first element of the array, and remove it
-
 const btns = document.querySelectorAll(".btn");
 const display = document.getElementById("display");
 
@@ -48,17 +46,16 @@ function operate(operator, ...values) {
 // Handle operators - check which operator is clicked, and push values from display to computing values array
 const handleOperators = (e) => {
   if (e == "+" || e == "-" || e == "*" || e == "/") {
-    // Block operating if operator is chosen
-    if (operator.length <= 0) {
+    if (operator.length <= 0) { // If there is one operator, proceed with regular computing
       operator.push(e);
       values.push(parseFloat(displayValue));
       displayValue = ""; // Bug with NaN when operator is chosen twice is caused by this code
-      console.log(operator)
-    } else {
+      console.log(operator);
+    } else { // If there is more than one operator, compute after clicking the operator
       operator.push(e);
-      handleComputing("=")
+      handleComputing("=");
       values.push(parseFloat(displayValue));
-      displayValue = ""
+      displayValue = "";
     }
   }
 };
@@ -88,8 +85,8 @@ const handleComputing = (e) => {
     values.push(parseFloat(displayValue));
     operate(operator[0], values);
     values = [];
-    operator.shift()
-    console.log(operator)
+    operator.shift();
+    console.log(operator);
   }
 };
 
