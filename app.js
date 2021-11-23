@@ -50,8 +50,7 @@ const handleOperators = (e) => {
       if (operator.length <= 0) { // If there is one operator, proceed with regular computing
         operator.push(e);
         values.push(parseFloat(displayValue));
-        displayValue = ""; // Bug with NaN when operator is chosen twice is caused by this code
-        console.log(operator);
+        displayValue = "";
       } else { // If there is more than one operator, compute after clicking the operator
         operator.push(e);
         handleComputing("=");
@@ -91,7 +90,6 @@ const handleComputing = (e) => {
     operate(operator[0], values);
     values = [];
     operator.shift();
-    console.log(operator);
   }
 };
 
@@ -99,7 +97,7 @@ const handleComputing = (e) => {
 const handleClear = (e) => {
   if (e == "C" || e == "Escape") {
     displayValue = "";
-    operator = "";
+    operator = [];
     values = [];
     display.innerHTML = displayValue;
   }

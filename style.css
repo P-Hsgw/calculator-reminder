@@ -1,15 +1,19 @@
 .wrapper {
-  padding-top: 60px;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding-top: 200px;
 }
 
 .container {
+  font-size: x-large;
   gap: 1px 1px;
   margin: 0 auto;
   background-color: pearl;
-  width: 400px;
+  width: 600px;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-template-rows: 50px 50px 50px 50px 50px 50px 50px;
+  grid-template-rows: 100px 100px 100px 100px 100px 100px 100px;
   grid-template-areas:
     "display display display display"
     "display display display display"
