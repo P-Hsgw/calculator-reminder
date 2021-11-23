@@ -1,8 +1,8 @@
 let displayValue = "";
-let operator = "";
+let operator = [];
 let values = [];
 
-// If isComputing, add operator to operatorQueue, and move first operator fro the operatorQueue to operator if computed
+// Change operator to an array, and when computing use first element of the array, and remove it
 
 const btns = document.querySelectorAll(".btn");
 const display = document.getElementById("display");
@@ -48,9 +48,18 @@ function operate(operator, ...values) {
 // Handle operators - check which operator is clicked, and push values from display to computing values array
 const handleOperators = (e) => {
   if (e == "+" || e == "-" || e == "*" || e == "/") {
-    operator = e;
+    operator.push(e);
     values.push(parseFloat(displayValue));
-    displayValue = "";
+    displayValue = ""; // Bug with NaN when operator is chosen twice is caused by this code
+    console.log(operator)
+    // Block operating if operator is chosen
+    // if (operator == "") {
+    //   operator = e;
+    //   values.push(parseFloat(displayValue));
+    //   displayValue = "";
+    // } else {
+    // Block operators, only equation is available
+    // }
   }
 };
 
@@ -77,8 +86,10 @@ const displayNumericalValues = (e) => {
 const handleComputing = (e) => {
   if (e == "=") {
     values.push(parseFloat(displayValue));
-    operate(operator, values);
+    operate(operator[0], values);
     values = [];
+    operator.shift()
+    console.log(operator)
   }
 };
 
@@ -108,6 +119,7 @@ const handleDot = (e) => {
   }
 };
 
+// Run functions on button click
 for (const btn of btns) {
   btn.addEventListener("click", (e) => {
     handleOperators(e.currentTarget.value);
@@ -124,6 +136,7 @@ for (const btn of btns) {
   });
 }
 
+// Run functions on keyboard click
 document.addEventListener("keydown", function (e) {
   handleOperators(e.key);
 
