@@ -48,18 +48,18 @@ function operate(operator, ...values) {
 // Handle operators - check which operator is clicked, and push values from display to computing values array
 const handleOperators = (e) => {
   if (e == "+" || e == "-" || e == "*" || e == "/") {
-    operator.push(e);
-    values.push(parseFloat(displayValue));
-    displayValue = ""; // Bug with NaN when operator is chosen twice is caused by this code
-    console.log(operator)
     // Block operating if operator is chosen
-    // if (operator == "") {
-    //   operator = e;
-    //   values.push(parseFloat(displayValue));
-    //   displayValue = "";
-    // } else {
-    // Block operators, only equation is available
-    // }
+    if (operator.length <= 0) {
+      operator.push(e);
+      values.push(parseFloat(displayValue));
+      displayValue = ""; // Bug with NaN when operator is chosen twice is caused by this code
+      console.log(operator)
+    } else {
+      operator.push(e);
+      handleComputing("=")
+      values.push(parseFloat(displayValue));
+      displayValue = ""
+    }
   }
 };
 
