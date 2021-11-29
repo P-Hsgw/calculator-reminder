@@ -9,7 +9,7 @@ const display = document.getElementById("display");
 const add = (arr) => {
   result = arr.reduce((a, b) => a + b, 0);
   displayValue = result;
-  display.innerHTML = displayValue;
+  display.innerHTML = displayValue; // Update innerHTML each time computing is finished
 };
 
 const substract = (arr) => {
