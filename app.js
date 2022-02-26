@@ -85,7 +85,7 @@ const displayNumericalValues = (e) => {
 
 // Compute numbers from values array
 const handleComputing = (e) => {
-  if (e == "=") {
+  if (e == "=" || e == "Enter") {
     values.push(parseFloat(displayValue));
     operate(operator[0], values);
     values = [];
